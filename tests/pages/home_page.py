@@ -26,16 +26,9 @@ class HomePage:
         self.btn_microphone = '.locator("label").get_by_role("button").nth(1)'
 
         # ====== Подсказки ======
-        # self.suggestion_containers = 'div[data-suggest-id]' # Так мы берём все подсказки на странице, независимо от текста.
-        def get_suggestion_text(self, index: int) -> str:
-            """Возвращает текст подсказки по порядковому номеру (0..5)"""
-            elements = self.page.query_selector_all(self.suggestion_container_selector)
-            return elements[index].inner_text().strip()
+        self.suggestion_selector = 'div[data-suggest-position]'
 
-        def click_suggestion(self, index: int):
-            """Кликает по подсказке по её порядковому номеру (0..5)"""
-            elements = self.page.query_selector_all(self.suggestion_container_selector)
-            self.page.click(f'div[data-suggest-id="{elements[index].get_attribute("data-suggest-id")}"]')
+
 
         # Tapbar
         self.tapbar_giga = '.get_by_role("button", name="Giga")'
@@ -85,12 +78,25 @@ class HomePage:
     def click_microphone(self):
         self.page.click(self.btn_microphone)
 
+    def get_suggestions_count(self) -> int:
+        """Возвращает количество подсказок на странице"""
+        return self.page.locator(self.suggestion_selector).count()
+
+    def get_suggestion_text(self, index: int) -> str:
+        """
+        Возвращает текст подсказки по её порядковому номеру.
+           index: 1..6 (как в атрибуте data-suggest-position)
+        """
+        locator = self.page.locator(f'div[data-suggest-position="{index}"]')
+        return locator.inner_text().strip()
+
     def click_suggestion(self, index: int):
-        buttons = self.page.query_selector_all(self.suggestion_buttons)
-        if index < len(buttons):
-            buttons[index].click()
-        else:
-            raise IndexError(f"Нет подсказки с индексом {index}")
+        """
+        Кликает по подсказке по её порядковому номеру.
+        index: 1..6
+        """
+        locator = self.page.locator(f'div[data-suggest-position="{index}"]')
+        locator.click()
 
     # ====== Tapbar ======
     def tap_giga(self):
@@ -112,7 +118,5 @@ class HomePage:
 
     # ====== Проверки состояния ======
     def is_loaded(self):
-        return self.page.is_visible(self.input_query)  # страница считается загруженной, если видно поле ввода
-
-    def get_suggestions_texts(self):
-        return [btn.inner_text() for btn in self.page.query_selector_all(self.suggestion_buttons)]
+        self.page.wait_for_selector(self.input_query, timeout=10000)
+        return True
