@@ -1,11 +1,16 @@
 
-PS C:\petprojects\gigachatweb> python -m venv .venv
-PS C:\petprojects\gigachatweb> source .venv/bin/activate
-PS C:\petprojects\gigachatweb> .venv\Scripts\activate
-PS C:\petprojects\gigachatweb> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-PS C:\petprojects\gigachatweb> .venv\Scripts\Activate.ps1
+PS C:\petprojects\gigachatweb>
+python -m venv .venv
+source .venv/bin/activate
+.venv\Scripts\activate
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+.venv\Scripts\Activate.ps1
 
 # после установки плейрайт из requirements браузеры еще не скачаны поэтому надо:
 python -m playwright install
 
 playwright codegen https://giga.chat
+
+pip install allure-pytest
+$env:PYTHONPATH="C:\PetProjects\GigaChatWeb"
+pytest --alluredir=allure-results

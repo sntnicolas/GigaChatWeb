@@ -1,1 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+*.venv
+.env
+
+# Pytest
+html-report/
+allure-results/
+
+# Playwright
+node_modules/
+.playwright/
+
+# IDE
 .idea/
+.vscode/
