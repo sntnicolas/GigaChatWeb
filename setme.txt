@@ -14,6 +14,24 @@ python -m playwright install
 
 playwright codegen https://giga.chat
 
+установим алюр плагин
 pip install allure-pytest
 $env:PYTHONPATH="C:\PetProjects\GigaChatWeb"
+
+запустим тесты с алюром
 pytest --alluredir=allure-results
+
+установим сам алюр ui
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+irm get.scoop.sh | iex
+scoop install allure
+allure --version
+
+запустим ui алюра
+allure serve allure-results
+
+установим java temurin
+scoop bucket add java
+scoop install temurin17-jdk (либо scoop search temurin, если нужны другие версии)
+
+
