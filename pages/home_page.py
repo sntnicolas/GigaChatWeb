@@ -9,10 +9,10 @@ class HomePage:
         # Навигационные кнопки
         self.btn_sidebar_toggle = '.DesktopSidebar-styled__SidebarContainer svg[role="button"]:nth-of-type(1)' # кнопка гигачат
         self.btn_gigachat = '.DesktopSidebar-styled__SidebarContainer svg[role="button"]:nth-of-type(2)' # открытие/закрытие сайдбара
-        self.btn_new_chat = '.get_by_role("button", name="Новый чат")'
-        self.btn_my_chats = '.get_by_role("button", name="Мои чаты")'
-        self.btn_smart_editor = '.get_by_role("button", name="Умный редактор")'
-        self.btn_tools = '.get_by_role("button", name="Полезное")'
+        self.btn_new_chat = 'button:has-text("Новый чат")'
+        self.btn_my_chats = 'button:has-text("Мои чаты")'
+        self.btn_smart_editor = 'button:has-text("Умный редактор")'
+        self.btn_tools = '.button:has-text("Полезное")'
 
         # Основное содержимое
         self.login_text1 = '.get_by_text("Откройте все возможности")'  # блок с текстом часть 1
