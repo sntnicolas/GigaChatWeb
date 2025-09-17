@@ -1,14 +1,14 @@
 from gigachat import GigaChat
-from . import config
+from config import GIGACHAT_MODEL, GIGACHAT_SCOPE, GIGACHAT_CREDENTIALS, VERIFY_SSL
 
 
 class GigaChatAgent:
     def __init__(self):
         self.giga = GigaChat(
-            credentials=config.GIGACHAT_CREDENTIALS,
-            scope=config.GIGACHAT_SCOPE,
-            model=config.GIGACHAT_MODEL,
-            verify_ssl_certs=config.VERIFY_SSL
+            credentials=GIGACHAT_CREDENTIALS,
+            scope=GIGACHAT_SCOPE,
+            model=GIGACHAT_MODEL,
+            verify_ssl_certs=VERIFY_SSL
         )
 
     def get_token(self):
@@ -17,8 +17,8 @@ class GigaChatAgent:
     def get_models(self):
         return self.giga.get_models()
 
-    def ask(self, prompt: str):
-        return self.giga.ask(prompt)
+    # def ask(self, prompt: str):
+    #     return self.giga.ask(prompt)
 
 
 # Пример использования
@@ -29,21 +29,3 @@ if __name__ == "__main__":
 
     print(token)
     print(models)
-
-giga = GigaChat(
-    credentials="MjYzZDVhY2MtMmYyNi00ZDY5LThkMDItYzk4N2YxZTI0ZDdiOmVlYmI2OTExLWVkYjUtNDNlYy04MTU3LWE3YjY0YjRkZTllZg==",
-    # scope="GIGACHAT_API_PERS",
-    # model="GigaChat",
-    verify_ssl_certs=False  # отключаем проверку сертификатов
-)
-
-token = giga.get_token()
-models = giga.get_models()
-
-print(token, models)
-
-from langchain_gigachat.chat_models import GigaChat
-
-llm = GigaChat(model="GigaChat-2-Max", top_p=0, timeout=120)
-response = llm.invoke("Кто тебя создал?")
-print(response.content)
