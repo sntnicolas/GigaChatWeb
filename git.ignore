@@ -17,5 +17,4 @@ node_modules/
 
 # IDE
 .idea/
-.idea/workspace.xml
 .vscode/
